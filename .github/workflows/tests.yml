@@ -2,21 +2,21 @@ name: test-check
 
 on: push
 
-jobs: 
+jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
 
-    - name: npm install
-     run: |
+      - name: npm install
+        run: |
           make install
-    - name: Run linter
-    run: |
+      - name: Run linter
+        run: |
           make lint
-   - name: Test & publish code coverage
+      - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.4
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
