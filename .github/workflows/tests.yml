@@ -10,6 +10,16 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
 
-    - run: make lint
-    - run: make test
-    
+    - name: npm install
+     run: |
+          make install
+    - name: Run linter
+    run: |
+          make lint
+   - name: Code Climate Coverage Action
+        uses: paambaati/codeclimate-action@v2.6.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: make test-coverage
+          debug: true
