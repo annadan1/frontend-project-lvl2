@@ -11,7 +11,6 @@ const __dirname = dirname(__filename);
 const getPath = (filepath) => path.join(__dirname, '..', '__fixtures__', filepath);
 const readFile = (filepath) => fs.readFileSync(getPath(filepath), 'utf-8');
 
-
 test('gendiff works correctly', () => {
     const resultGenDiff = genDiff(getPath('file1.json'), getPath('file2.json'));    
     const expected = readFile('total.txt');
