@@ -22,11 +22,7 @@ const genDiff = (filepath1, filepath2) => {
         } else if (parseFile1[key] !== parseFile2[key]) {
             diff[`- ${key}`] = parseFile1[key];
             diff[`+ ${key}`] = parseFile2[key];
-        } else if (!_.has(parseFile1, key) && _.has(parseFile2, key)) {
-            diff[`+ ${key}`] = parseFile2[key];
-        } else if (_.has(parseFile1, key) && !_.has(parseFile2, key)) {
-            diff[`- ${key}`] = parseFile1[key];
-        }
+        } 
     })
     diff = JSON.stringify(diff, null, 2);
     return diff.replace(/"/g, '').replace(/,/g, '');
