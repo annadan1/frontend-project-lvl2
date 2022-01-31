@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 
 const parse = (filepath) => {
     // eslint-disable-next-line no-undef
