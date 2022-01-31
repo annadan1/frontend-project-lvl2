@@ -4,7 +4,8 @@
   "description": "frontend-project-lvl2",
   "main": "src/gendiff.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=testing NODE_OPTIONS=--experimental-vm-modules npx jest --watchAll"
+    "test": "cross-env NODE_ENV=testing NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "test-watch": "cross-env NODE_ENV=testing NODE_OPTIONS=--experimental-vm-modules npx jest --watchAll"
   },
   "jest": {
     "testEnvironment": "node",
