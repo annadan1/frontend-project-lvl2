@@ -8,18 +8,18 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const getPath = (filepath) => path.join(__dirname, '..', '__fixtures__', filepath);
+const getPath = (filepath) => path.join(__dirname, '..', '__fixtures__', 'plain', filepath);
 const readFile = (filepath) => fs.readFileSync(getPath(filepath), 'utf-8');
 
-describe('gendiff works correctly', () => {
+describe('gendif works correctly on plain files', () => {
     test('with json', () => {
         const resultGenDiff = genDiff(getPath('file1.json'), getPath('file2.json'));
-        const expected = readFile('totaljson.txt');
+        const expected = readFile('total.txt');
         expect(resultGenDiff).toBe(expected);
     });
     test('with yml', () => {
         const resultGenDiff = genDiff(getPath('file1.yml'), getPath('file2.yml'));
-        const expected = readFile('totalyml.txt');
+        const expected = readFile('total.txt');
         expect(resultGenDiff).toBe(expected);
     });
 });
