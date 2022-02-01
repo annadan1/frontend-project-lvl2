@@ -1,12 +1,5 @@
 import _ from 'lodash';
-import fs from 'fs';
-import path from 'path';
-
-const parse = (filepath) => {
-    // eslint-disable-next-line no-undef
-    const file = fs.readFileSync(path.resolve(process.cwd(), filepath), 'utf-8');
-    return JSON.parse(file);
-};
+import parse from './parse.js';
 
 const genDiff = (filepath1, filepath2) => {
     const parseFile1 = parse(filepath1);
@@ -22,7 +15,7 @@ const genDiff = (filepath1, filepath2) => {
         } else if (parseFile1[key] !== parseFile2[key]) {
             diff[`- ${key}`] = parseFile1[key];
             diff[`+ ${key}`] = parseFile2[key];
-        } 
+        }
     })
     diff = JSON.stringify(diff, null, 2);
     return diff.replace(/"/g, '').replace(/,/g, '');

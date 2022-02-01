@@ -11,8 +11,15 @@ const __dirname = dirname(__filename);
 const getPath = (filepath) => path.join(__dirname, '..', '__fixtures__', filepath);
 const readFile = (filepath) => fs.readFileSync(getPath(filepath), 'utf-8');
 
-test('gendiff works correctly', () => {
-    const resultGenDiff = genDiff(getPath('file1.json'), getPath('file2.json'));
-    const expected = readFile('total.txt');
-    expect(resultGenDiff).toBe(expected);
+describe('gendiff works correctly', () => {
+    test('with json', () => {
+        const resultGenDiff = genDiff(getPath('file1.json'), getPath('file2.json'));
+        const expected = readFile('totaljson.txt');
+        expect(resultGenDiff).toBe(expected);
+    });
+    test('with yml', () => {
+        const resultGenDiff = genDiff(getPath('file1.yml'), getPath('file2.yml'));
+        const expected = readFile('totalyml.txt');
+        expect(resultGenDiff).toBe(expected);
+    });
 });
