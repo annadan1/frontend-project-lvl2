@@ -8,14 +8,14 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const getPathPlain = (filepath) => path.join(__dirname, '..', '__fixtures__', 'plain', filepath);
+const getPathPlain = (filepath) => path.join(__dirname, '..', '__fixtures__', 'stylish', 'plain', filepath);
 const readFilePlain = (filepath) => fs.readFileSync(getPathPlain(filepath), 'utf-8');
 
-const getPathNested = (filepath) => path.join(__dirname, '..', '__fixtures__', 'nested', filepath);
+const getPathNested = (filepath) => path.join(__dirname, '..', '__fixtures__', 'stylish', 'nested', filepath);
 const readFileNested = (filepath) => fs.readFileSync(getPathNested(filepath), 'utf-8');
 
 
-describe('gendif works correctly', () => {
+describe('gendif works correctly (format stylish)', () => {
     describe('plain files', () => {
         const expectedPlain = readFilePlain('total.txt');
         test('with json', () => {
