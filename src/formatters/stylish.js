@@ -9,25 +9,25 @@ const getUnionObjects = (file1, file2) => {
         const value2 = file2[key];
         if (_.isObject(value1) && _.isObject(value2)) {
             return {
-                key, value: null, type: 'nested', children: getUnionObjects(value1, value2),
+                key, value: null, status: 'nested', children: getUnionObjects(value1, value2),
             };
         }
         if (!_.has(file1, key)) {
             return {
-                key, value: value2, type: 'added', children: [],
+                key, value: value2, status: 'added', children: [],
             }
         } if (!_.has(file2, key)) {
             return {
-                key, value: value1, type: 'deleted', children: [],
+                key, value: value1, status: 'removed', children: [],
             };
         }
         if (!_.isEqual(value1, value2)) {
             return {
-                key, value: { value1, value2 }, type: 'changed', children: [],
+                key, value: { value1, value2 }, status: 'updated', children: [],
             };
         }
         return {
-            key, value: value1, type: 'unchanged', children: [],
+            key, value: value1, status: 'unchanged', children: [],
         };
     })
 };
@@ -55,16 +55,16 @@ const stringify = (object, depth = 1) => {
 
     const result = object
         .flatMap(({
-            key, value, type, children
+            key, value, status, children
         }) => {
-            if (type === 'nested') {
+            if (status === 'nested') {
                 return `${currentIndent}  ${key}: ${stringify(children, depth + 1)}`;
-            } if (type === 'added') {
+            } if (status === 'added') {
                 return `${currentIndent}+ ${key}: ${iter(value, depth + 1)}`;
-            } if (type === 'deleted') {
+            } if (status === 'removed') {
                 return `${currentIndent}- ${key}: ${iter(value, depth + 1)}`;
             }
-            if (type === 'changed') {
+            if (status === 'updated') {
                 return [`${currentIndent}- ${key}: ${iter(value.value1, depth + 1)}`,
                 `${currentIndent}+ ${key}: ${iter(value.value2, depth + 1)}`
                 ]

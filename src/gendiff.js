@@ -1,5 +1,5 @@
 import parse from './parse.js';
-import stylish from './stylish.js'
+import stylish from './formatters/stylish.js'
 
 const genDiff = (filepath1, filepath2) => {
     const parseFile1 = parse(filepath1);
