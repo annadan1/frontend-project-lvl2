@@ -1,24 +1,16 @@
-import _ from 'lodash';
 import parse from './parse.js';
+import stylish from './stylish.js'
 
 const genDiff = (filepath1, filepath2) => {
     const parseFile1 = parse(filepath1);
     const parseFile2 = parse(filepath2);
 
-    const keys = _.union(_.keys(parseFile1), _.keys(parseFile2)).sort();
+    const diff = stylish(parseFile1, parseFile2);
 
-    let diff = {};
-
-    keys.forEach((key) => {
-        if (parseFile1[key] === parseFile2[key]) {
-            diff[`  ${key}`] = parseFile1[key];
-        } else if (parseFile1[key] !== parseFile2[key]) {
-            diff[`- ${key}`] = parseFile1[key];
-            diff[`+ ${key}`] = parseFile2[key];
-        }
-    })
-    diff = JSON.stringify(diff, null, 2);
-    return diff.replace(/"/g, '').replace(/,/g, '');
+    return diff;
 };
 
 export default genDiff;
+
+//console.log(genDiff('../__fixtures__/plain/file1.json', '../__fixtures__/plain/file2.json'))
+//console.log(genDiff('../__fixtures__/nested/file1.json', '../__fixtures__/nested/file2.json'))

@@ -8,18 +8,34 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const getPath = (filepath) => path.join(__dirname, '..', '__fixtures__', 'plain', filepath);
-const readFile = (filepath) => fs.readFileSync(getPath(filepath), 'utf-8');
+const getPathPlain = (filepath) => path.join(__dirname, '..', '__fixtures__', 'plain', filepath);
+const readFilePlain = (filepath) => fs.readFileSync(getPathPlain(filepath), 'utf-8');
 
-describe('gendif works correctly on plain files', () => {
-    test('with json', () => {
-        const resultGenDiff = genDiff(getPath('file1.json'), getPath('file2.json'));
-        const expected = readFile('total.txt');
-        expect(resultGenDiff).toBe(expected);
+const getPathNested = (filepath) => path.join(__dirname, '..', '__fixtures__', 'nested', filepath);
+const readFileNested = (filepath) => fs.readFileSync(getPathNested(filepath), 'utf-8');
+
+
+describe('gendif works correctly', () => {
+    describe('plain files', () => {
+        const expectedPlain = readFilePlain('total.txt');
+        test('with json', () => {
+            const resultGenDiff = genDiff(getPathPlain('file1.json'), getPathPlain('file2.json'));
+            expect(resultGenDiff).toBe(expectedPlain);
+        });
+        test('with yml', () => {
+            const resultGenDiff = genDiff(getPathPlain('file1.yml'), getPathPlain('file2.yml'));
+            expect(resultGenDiff).toBe(expectedPlain);
+        });
     });
-    test('with yml', () => {
-        const resultGenDiff = genDiff(getPath('file1.yml'), getPath('file2.yml'));
-        const expected = readFile('total.txt');
-        expect(resultGenDiff).toBe(expected);
+    describe('nested files', () => {
+        const expectedNested = readFileNested('total.txt');
+        test('with json', () => {
+            const resultGenDiff = genDiff(getPathNested('file1.json'), getPathNested('file2.json'));
+            expect(resultGenDiff).toBe(expectedNested);
+        });
+        test('with yml', () => {
+            const resultGenDiff = genDiff(getPathNested('file1.yml'), getPathNested('file2.yml'));
+            expect(resultGenDiff).toBe(expectedNested);
+        });
     });
 });
