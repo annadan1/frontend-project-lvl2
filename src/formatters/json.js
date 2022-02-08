@@ -1,6 +1,3 @@
-
-const json = (data) => {
-    return JSON.stringify(data);
-};
+const json = (data) => JSON.stringify(data);
 
 export default json;

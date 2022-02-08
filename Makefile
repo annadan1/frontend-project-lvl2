@@ -4,6 +4,8 @@ publish:
 	npm publish --dry-ru
 lint:
 	npx eslint .
+fix:
+	npx eslint --fix .
 test:
 	npm test
 test-watch:

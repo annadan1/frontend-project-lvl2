@@ -3,14 +3,16 @@ import plain from './plain.js';
 import json from './json.js';
 
 const format = (data, formatName) => {
-    if (formatName === 'stylish') {
-        return stylish(data)
-    } if (formatName === 'plain') {
-        return plain(data);
-    }
-    if (formatName === 'json') {
-        return json(data);
-    }
+  switch (formatName) {
+    case 'stylish':
+      return stylish(data);
+    case 'plain':
+      return plain(data);
+    case 'json':
+      return json(data);
+    default:
+      throw new Error('formatter not found');
+  }
 };
 
 export default format;
