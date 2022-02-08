@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
+import process from 'process';
 
 const parse = (filepath) => {
-    // eslint-disable-next-line no-undef
     const file = fs.readFileSync(path.resolve(process.cwd(), filepath), 'utf-8');
     const format = path.extname(filepath);
     if (format === '.json') {
