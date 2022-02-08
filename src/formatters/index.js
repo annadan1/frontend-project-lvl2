@@ -11,7 +11,7 @@ const format = (data, formatName) => {
     case 'json':
       return json(data);
     default:
-      throw new Error('formatter not found');
+      throw new Error('format not found');
   }
 };
 

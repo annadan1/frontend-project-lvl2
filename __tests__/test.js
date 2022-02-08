@@ -3,6 +3,7 @@ import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import genDiff from '../src/gendiff.js';
+import format from '../src/formatters/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -111,6 +112,22 @@ describe('gendif works correctly', () => {
         const test = resultGenDiffNested('file1.yml', 'file2.yml', formatName);
         expect(test).toBe(expectedNested);
       });
+    });
+  });
+  describe('format unknown', () => {
+    const formatName = 'txt';
+    test('to throw format unknown', () => {
+      expect(() => {
+        resultGenDiffFlat('file1.txt', 'file2.txt', formatName);
+      }).toThrow();
+    });
+  });
+  describe('file not found', () => {
+    const formatName = 'md';
+    test('to throw format unknown', () => {
+      expect(() => {
+        format({}, formatName);
+      }).toThrow();
     });
   });
 });

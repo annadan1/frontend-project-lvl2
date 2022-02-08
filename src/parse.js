@@ -13,7 +13,7 @@ const parse = (filepath) => {
     case '.yaml':
       return yaml.load(file);
     default:
-      throw new Error('formatter not found');
+      throw new Error('format unknow');
   }
 };
 
