@@ -12,6 +12,7 @@ program
   .option('-f, --format <type>', 'output format', 'stylish')
   .action((filepath1, filepath2, { format }) => {
     const diff = genDiff(filepath1, filepath2, format);
+    // eslint-disable-next-line no-console
     console.log(diff);
   });
 program.parse();

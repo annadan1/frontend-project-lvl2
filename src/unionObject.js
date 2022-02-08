@@ -1,8 +1,9 @@
 import _ from 'lodash';
 
 const unionObjects = (file1, file2) => {
-  const keys = _.union(_.keys(file1), _.keys(file2)).sort();
-  return keys.map((key) => {
+  const keys = _.union(_.keys(file1), _.keys(file2));
+  const sortedKeys = [...keys].sort();
+  return sortedKeys.map((key) => {
     const value1 = file1[key];
     const value2 = file2[key];
     if (_.isObject(value1) && _.isObject(value2)) {
