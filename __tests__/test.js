@@ -72,4 +72,29 @@ describe('gendif works correctly', () => {
             });
         });
     })
+    describe('format json', () => {
+        const formatName = 'json';
+        describe('flat files', () => {
+            const expectedFlat = readFileFlat(formatName, 'total.txt');
+            test('with json', () => {
+                const test = resultGenDiffFlat('file1.json', 'file2.json', formatName);
+                expect(test).toBe(expectedFlat);
+            });
+            test('with yml', () => {
+                const test = resultGenDiffFlat('file1.yml', 'file2.yml', formatName);
+                expect(test).toBe(expectedFlat);
+            });
+        });
+        describe('nested files', () => {
+            const expectedNested = readFileNested(formatName, 'total.txt');
+            test('with json', () => {
+                const test = resultGenDiffNested('file1.json', 'file2.json', formatName);
+                expect(test).toBe(expectedNested);
+            });
+            test('with yml', () => {
+                const test = resultGenDiffNested('file1.yml', 'file2.yml', formatName);
+                expect(test).toBe(expectedNested);
+            });
+        });
+    })
 });
